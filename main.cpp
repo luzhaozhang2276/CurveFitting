@@ -2,63 +2,88 @@
 #include <vector>
 #include <cstdlib>
 #include <ctime>
-#include "eigen3/Eigen/Core"
-#include "eigen3/Eigen/Dense"
+//#include <fstream>
+
+#include <opencv2/opencv.hpp>
+#include <Eigen/Core>
+#include <Eigen/Dense>
+
+#include "GLogHelper.h"
 
 // #define random(x)  rand( x)/RAND_MAX
 
 using namespace std;
 using namespace Eigen;
 
-void GN(const vector<double> &y_data, const vector<double> &x_data, const int N, double ae, double be);
-void R_GN(const vector<double> &y_data, const vector<double> &x_data, const int N, double ae, double be);
-void LM_Nielsen(const vector<double> &y_data, const vector<double> &x_data, const int N, double ae, double be);
-void R_LM(const vector<double> &y_data, const vector<double> &x_data, const int N, double ae, double be);
+void GN(const vector<double> &y_data, const vector<double> &x_data, int N, double ae, double be, double ce);
+void LM(const vector<double> &y_data, const vector<double> &x_data, int N, double ae, double be, double ce);
+void R_GN(const vector<double> &y_data, const vector<double> &x_data, int N, double ae, double be);
+void LM_Nielsen(const vector<double> &y_data, const vector<double> &x_data, int N, double ae, double be, double ce);
+void R_LM(const vector<double> &y_data, const vector<double> &x_data, int N, double ae, double be);
 double getRand();
 
 const double function_tolerance = 1e-5;
 const double max_trans_epsilon = 1e-5;
 const double parameter_tolerance = 1e-5;
-const int iterations = 20;
+const int iterations = 1000;
 
 int main(int argc, char **argv)
 {
-    double ar = 2.0, br = 0.0;  // 真实参数值
-    double ae = -8, be = -9.0 ;   // 初始估计参数值
-    int N = 1000 ;                                // 数据点
+    char name[] = "log";
+    GLogHelper log(name);
 
-    // 测试数据
+    double ar = 1.0, br =  2.0, cr = 1.0;   // 真实参数值
+    double ae = 2.0, be = -1.0, ce = 5.0;   // 初始估计参数值
+//    double ae = 0.9, be = 1.9, ce = 0.9;   // 初始估计参数值
+    int N = 1000;                           // 数据点
+    double w_sigma = 1.0;                   // 噪声sigma
+    double inv_sigma = 1.0 / w_sigma;
+    cv::RNG rng;                            // Opencv随机数生成器
+
+    /// 生成测试数据并保存
+    ofstream filePoints("./scripts/data.txt", ios::trunc);
     vector<double> x_data, y_data;
     for (int i = 0; i < N;  i++ )
     {
-        x_data.push_back(double(i));
-        y_data.push_back( 2 *x_data[i]  + 0.001 * getRand() );
+        double x = i / 1000.0;
+        x_data.push_back(x);
+
+        double y = exp(ar * x * x + br * x + cr)  + rng.gaussian(w_sigma * w_sigma);
+        // outliers
+        //if (i == 98 || i == 388 || i == 888 || i == 988)
+        if (i == 98 || i == 388 || i == 888 || i == 988)
+            y_data.push_back(20.00);
+        else
+        y_data.push_back(y);
+
+        filePoints << x << "," << y << endl;
     }
+    filePoints.close();
 
-    std::cout << "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"<< std::endl;
-    std::cout << "给定-" << N << "-组点对" << " -数据带有[-0.01,0.01]均匀分布的噪声"<< std::endl;
-    std::cout << "真实参数值：" <<"ar = "  << ar << " " << "br = "  << br  << std::endl;
-    std::cout << "初始估计值：" <<"ae = " << ae << " " << "be = " << be  << std::endl;
-    std::cout << std::endl;
-    std::cout << "数据状况良好的情况下：" << std::endl;
+    GN( y_data, x_data, N, ae, be, ce);
+    LOG(INFO);
+    LM(y_data, x_data, N, ae, be, ce);
+    LOG(INFO);
+    LM_Nielsen(y_data, x_data, N, ae, be, ce);
+    LOG(INFO);
+//    R_GN(y_data, x_data, N, ae, be);
+//    LOG(INFO);
+//    R_LM(y_data,x_data,N, ae ,be);
+//    LOG(INFO);
 
-    GN( y_data, x_data, N, ae, be) ;
-    LM_Nielsen(y_data, x_data, N, ae, be);
-    R_GN(y_data, x_data, N, ae, be);
-    R_LM(y_data,x_data,N, ae ,be);
+//    ofstream fileResult("./scripts/result.txt", ios::trunc);
+//    fileResult << ae << ',' << be << ',' << ce;
+//    fileResult.close();
 
     // outliers
-    y_data[988] = 0.00;
-    y_data[998] = 0.00;
+//    y_data[988] = 0.00;
+//    y_data[998] = 0.00;
 
-    std::cout << std::endl;
-    std::cout << "手动 增加 outliers : "<<std::endl;
-    std::cout << "令　y[988] = 0.0 ，y[998] = 0.0  　再次求解: " << std::endl;
-    GN(y_data, x_data, N, ae, be);
-    LM_Nielsen(y_data, x_data, N, ae, be);
-    R_GN(y_data, x_data, N, ae, be);
-    R_LM(y_data, x_data, N, ae, be);
-    std::cout << "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<" << std::endl;
+//    LOG(INFO) << "手动 增加 outliers : "<<std::endl;
+//    LOG(INFO) << "令　y[988] = 0.0 ，y[998] = 0.0  　再次求解: ";
+
+    LOG(INFO) << "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<";
+    system("bash ./scripts/display.sh");
     return 0;
 }
 
@@ -66,97 +91,187 @@ int main(int argc, char **argv)
 double getRand()
 {
     const int n = 99;
-    srand( time(NULL));
+    srand( time(nullptr));
     return 2.0* ( rand()%(n+1) / (double) (n+1) ) -1.0 ;
 }
 
-/*
-** Guassian-Newton
-**
-*/
-void GN ( const vector<double>& y_data , const vector<double>& x_data , const int N ,double ae ,double be )
+
+/**
+ * @brief Gauss-Newton
+ */
+void GN ( const vector<double>& y_data , const vector<double>& x_data , int N ,double ae ,double be ,double ce)
 {
     // 开始Gauss-Newton迭代
-    std::cout << std::endl;
-    std::cout << " 开始Gauss-Newton迭代 : " << std::endl;
+    LOG(INFO) << "---------------------------------------------------------";
+    LOG(INFO) << "开始Gauss-Newton迭代 : ";
 
-    double Fx = 0, lastFx = 0; // 本次迭代的Fx和上一次迭代的Fx
+    double w_sigma = 1.0;                   // 噪声sigma
+    double inv_sigma = 1.0 / w_sigma;
+    double cost = 0, lastCost = 0;  // 本次迭代的cost和上一次迭代的cost
 
+    ofstream file("./scripts/error-GN.txt", ios::trunc);
     for ( int iter = 0; iter < iterations; iter++ )
     {
-        Matrix2d H = Matrix2d::Zero();
-        Vector2d b = Vector2d::Zero();
-        Fx = 0;
+        Matrix3d H = Matrix3d::Zero();             // Hessian = J^T W^{-1} J in Gauss-Newton
+        Vector3d b = Vector3d::Zero();             // bias
+        cost = 0;
 
         for (int i = 0; i < N; i++)
         {
             double xi = x_data[i], yi = y_data[i];
-            double error = 0;
-            error = yi - (ae * xi + be);
-            Vector2d J;
-            J[0] = double(-xi);
-            J[1] = double(-1);
-            H +=  J * J.transpose() ;
-            b += -error * J  ;
-            Fx += error * error;
+            double error= yi - exp(ae * xi * xi + be * xi + ce);
+            Vector3d J; // 雅可比矩阵
+            J[0] = -xi * xi * exp(ae * xi * xi + be * xi + ce);  // de/da
+            J[1] = -xi * exp(ae * xi * xi + be * xi + ce);  // de/db
+            J[2] = -exp(ae * xi * xi + be * xi + ce);  // de/dc
+
+            H += inv_sigma * inv_sigma * J * J.transpose();
+            b += -inv_sigma * inv_sigma * error * J;
+            cost += error * error;
         } // for
 
         // 求解线性方程 Hx=b
-        Vector2d dx = H.ldlt().solve(b);
+        Vector3d dx = H.ldlt().solve(b);
         if (isnan(dx[0]))
         {
-            cout << "result is nan!" << endl;
+            LOG(INFO) << "result is nan!";
             break;
         }
+
+        if (iter > 0 && cost >= lastCost) {
+            LOG(INFO) << "cost: " << cost << ">= last cost: " << lastCost << ", break.";
+            LOG(INFO) << "ae = " << ae << "\tbe = " << be << "\tce = " << ce;
+            LOG(INFO) << "---------------------------------------------------------";
+            break;
+        }
+
         // update
         ae += dx[0];
         be += dx[1];
-        lastFx = Fx;
-        Fx =0;
+        ce += dx[2];
+        lastCost = cost;
+        cost =0;
         // Calculation
-        for (int i = 0; i < N; i++)
-        {
-            double error = 0;
-            double xi = x_data[i], yi = y_data[i];
-            error = yi - (ae * xi + be);
-            Fx += error * error;
-
-        } // for
-        std::cout << " ae = "<< ae << "   " << "be = " <<  be  <<  std::endl;
-        //
-        // if (fabs((Fx - lastFx) / lastFx) < function_tolerance)
-        // {
-        //     std::cout << "Approach to GN Fx converge, itera_count = " << iter + 1 << std::endl;
-        //     // std::cout << " ae = "<< ae << "   " << "be = " <<  be  <<  std::endl;
-        //     std::cout << "---------------------------------------------------------" << std::endl;
-        //     break;
-        // }
-        //
-        if ( sqrt(pow(dx[0], 2) + pow(dx[1], 2)) <= (sqrt(pow(ae, 2) + pow(be, 2)) + parameter_tolerance) * parameter_tolerance)
-        {
-            // std::cout << "+1" << std::endl;
-            std::cout << "Approach to GN parameter converge, itera_count = " << iter + 1 << std::endl;
-            std::cout << "---------------------------------------------------------" << std::endl;
-            break;
-        }
-        // 达到最大迭代次数
-        if (iter == iterations - 1)
-        {
-            std::cout << "GN Have reach the maximum iteration num " << iter << std::endl;
-            break;
-        }
-        lastFx = Fx;
+//        for (int i = 0; i < N; i++)
+//        {
+//            double xi = x_data[i], yi = y_data[i];
+//            double error = yi - exp(ae * xi * xi + be * xi + ce);
+//            cost += error * error;
+//        } // for
+//        LOG(INFO) << "dx = " << dx[0] << "\t," << dx[1] << "\t," << dx[2];
+//        LOG(INFO) << "iter: " << iter << "  ,cost: " << lastCost << " ae = "<< ae << "  be = " <<  be << "  ce = " << ce;
+        file << iter + 1 << "," << lastCost << endl;
     } // for
+    file.close();
 }
 
-/*
-**  Robustied-Guassian-Newton
-**
-*/
-void R_GN(const vector<double> &y_data, const vector<double> &x_data, const int N, double ae, double be)
+/**
+ * @brief LM
+ */
+void LM ( const vector<double>& y_data , const vector<double>& x_data , int N ,double ae ,double be ,double ce)
 {
-    std::cout << std::endl;
-    std::cout << " 开始Robust-Gauss-Newton迭代 : " << std::endl;
+    LOG(INFO) << "---------------------------------------------------------";
+    LOG(INFO) << "开始 LM 迭代 :";
+    // 开始迭代
+    double u = 0.0 ;
+    ofstream file("./scripts/error-LM.txt", ios::trunc);
+    for ( int iter = 0 ; iter < iterations ; iter ++ )
+    {
+//        LOG(INFO) << "iter: " << iter;
+        double cost = 0.0, newcost = 0.0;
+        Matrix3d H = Matrix3d::Zero();             // Hessian = J^T W^{-1} J in Gauss-Newton
+        Vector3d b = Vector3d::Zero();             // bias
+        // 计算 H b
+        for(int i = 0 ; i < N ; i ++ )
+        {
+            double xi = x_data[i], yi = y_data[i];
+            double error= yi - exp(ae * xi * xi + be * xi + ce);
+            Vector3d J; // 雅可比矩阵
+            J[0] = -xi * xi * exp(ae * xi * xi + be * xi + ce);  // de/da
+            J[1] = -xi * exp(ae * xi * xi + be * xi + ce);  // de/db
+            J[2] = -exp(ae * xi * xi + be * xi + ce);  // de/dc
+
+            H += J * J.transpose();
+            b += - error * J;
+            cost += error * error;
+        }
+
+        if (iter == 0) {
+            u = (1e-8) * max(H(0, 0), max(H(1, 1), H(2, 2)));
+//            LOG(WARNING) << "u0 = " << u;
+        }
+
+//        LOG(WARNING) << "u = " << u;
+        H = H + ( u * Eigen::MatrixXd::Identity(3, 3));
+        //  solver update
+        Eigen::Vector3d dx = H.ldlt().solve(b);
+
+        // Matrix<double ,1,1> L ;
+        Eigen::Matrix<double,1,1> L;    // 分母
+        L(0,0) = 0.5 * dx.transpose() * (u * dx + b);
+
+        // try to update
+        double new_ae = ae + dx[0];
+        double new_be = be + dx[1];
+        double new_ce = ce + dx[2];
+
+        // 重新计算Fx
+        for(int i = 0 ; i < N ; i++ )
+        {
+            double xi = x_data[i], yi = y_data[i];
+            double error = 0;
+            error = yi - exp(new_ae * xi * xi + new_be * xi + new_ce);
+            newcost += error * error;
+        }
+
+        // 没达到收敛条件则继续迭代
+        //      cost - newcost
+        // p = -------------
+        //        L(0,0)
+        double p = (cost - newcost) / L(0, 0) ;
+        if (p < 0.25){
+            u = 2 * u;
+        } else if (p > 0.75) {
+            u = u / 3;
+        }
+
+        // update parameter
+        if (p > 0)
+        {
+            ae = new_ae;
+            be = new_be;
+            ce = new_ce;
+        }
+
+        // 判断收敛
+        if (iter > 0 &&
+            sqrt(pow(dx[0], 2) + pow(dx[1], 2) + pow(dx[2], 2)) <=
+            (sqrt(pow(new_ae, 2) + pow(new_ce, 2) + pow(new_be, 2)) + parameter_tolerance) * parameter_tolerance
+                )
+        {
+            LOG(INFO) << "Approach to LM parameter converge, iterations count = " << iter + 1 << "\tcost = " << cost;
+            LOG(INFO) << "ae = " << ae << "\tbe = " << be << "\tce = " << ce;
+            LOG(INFO) << "---------------------------------------------------------";
+            break;
+        }
+        //  达到迭代次数
+        if (iter == iterations - 1)
+        {
+            LOG(INFO) << "LM Have reach the maximum iteration num " << iter;
+            break;
+        }
+        file << iter + 1 << "," << newcost << endl;
+    }// for
+    file.close();
+
+}
+
+/**
+ * @brief Robust-Gauss-Newton
+ */
+void R_GN(const vector<double> &y_data, const vector<double> &x_data, int N, double ae, double be)
+{
+    LOG(INFO) << " 开始Robust-Gauss-Newton迭代 : ";
     double Fx = 0, lastFx = 0; // 本次迭代的Fx和上一次迭代的Fx
     // 开始rgn迭代
     for (int iter = 0; iter < iterations; iter++)
@@ -191,7 +306,7 @@ void R_GN(const vector<double> &y_data, const vector<double> &x_data, const int 
 
         if (isnan(dx[0]))
         {
-            cout << "result is nan!" << endl;
+            LOG(INFO) << "result is nan!";
             break;
         }
         // update
@@ -207,136 +322,142 @@ void R_GN(const vector<double> &y_data, const vector<double> &x_data, const int 
             error = yi - (ae * xi + be);
             Fx += error * error;
         } // for
-        std::cout << " ae = " << ae << "   " << "be = " << be << std::endl;
+        LOG(INFO) << " ae = " << ae << "   " << "be = " << be;
         lastFx = Fx;
 
         // if (fabs((Fx - lastFx) / lastFx) < function_tolerance)
         // {
-        //     std::cout << "Approach to R-GN Fx converge, itera_count = " << iter + 1 << std::endl;
-        //     // std::cout << " ae = "<< ae << "   " << "be = " <<  be  <<  std::endl;
-        //     std::cout << "---------------------------------------------------------" << std::endl;
+        //     LOG(INFO) << "Approach to R-GN Fx converge, itera_count = " << iter + 1;
+        //     // LOG(INFO) << " ae = "<< ae << "   " << "be = " <<  be  <<  std::endl;
+        //     LOG(INFO) << "---------------------------------------------------------";
         //     break;
         // }
         //
         if (iter >=0 && sqrt(pow(dx[0], 2) + pow(dx[1], 2)) <= (sqrt(pow(ae, 2) + pow(be, 2)) + parameter_tolerance) * parameter_tolerance)
         {
-            std::cout << "Approach to R-GN parameter converge, itera_count = " << iter + 1 << std::endl;
-            std::cout << "---------------------------------------------------------" << std::endl;
+            LOG(INFO) << "Approach to R-GN parameter converge, itera_count = " << iter + 1;
+            LOG(INFO) << "---------------------------------------------------------";
             break;
         }
         // 达到最大迭代次数
         if (iter == iterations - 1)
         {
-            std::cout << "R_GN Have reach the maximum iteration num " << iter << std::endl;
+            LOG(INFO) << "R_GN Have reach the maximum iteration num " << iter;
             break;
         }
 
     } // for
-    cout << "estimated ab = " << ae << ", " << be << endl;
+    LOG(INFO) << "estimated ab = " << ae << ", " << be;
 }
 
-/*
-    LM-Nielson
-*/
-void LM_Nielsen(const vector<double> &y_data, const vector<double> &x_data, const int N, double ae, double be)
+/**
+ * @brief LM_Nielsen
+ */
+void LM_Nielsen(const vector<double> &y_data, const vector<double> &x_data, int N, double ae, double be, double ce)
 {
-    std::cout << std::endl;
-    std::cout << " 开始 LM_Nielsen 迭代 : " << std::endl;
+    LOG(INFO) << "---------------------------------------------------------";
+    LOG(INFO) << "开始 LM_Nielsen 迭代 : ";
     // 开始迭代
     double v = 2.0;
     double u = 0.0 ;
-    // double p = 0.0;
+    double cost, newCost;  // 本次迭代的cost和新迭代的cost
+    ofstream file("./scripts/error-LM-N.txt", ios::trunc);
     for ( int iter = 0 ; iter < iterations ; iter ++ )
     {
-        double Fx = 0.0, newFx = 0.0;
-        Matrix2d H = Matrix2d::Zero();
-        Vector2d b = Vector2d::Zero();
+        Matrix3d H = Matrix3d::Zero();             // Hessian = J^T W^{-1} J in Gauss-Newton
+        Vector3d b = Vector3d::Zero();             // bias
         // 计算 H b
+        cost = 0;
         for(int i = 0 ; i < N ; i ++ )
         {
-            double xi = x_data[i];
-            double yi = y_data[i];
-            Vector2d J;
-            J[0] = double(-xi);
-            J[1] = double(-1);
-            Eigen::Matrix<double, 2, 2> JTJ = J * J.transpose();    // JTJ
-            double error = 0.0; //  残差函数f
-            error = yi - (ae * xi + be);
-            H += JTJ ;
-            b += -error * J;
-            // 计算损失函数
-            Fx += error*error;
+            double xi = x_data[i], yi = y_data[i];
+            double error= yi - exp(ae * xi * xi + be * xi + ce);
+            Vector3d J; // 雅可比矩阵
+            J[0] = -xi * xi * exp(ae * xi * xi + be * xi + ce);  // de/da
+            J[1] = -xi * exp(ae * xi * xi + be * xi + ce);  // de/db
+            J[2] = -exp(ae * xi * xi + be * xi + ce);  // de/dc
+
+            H += J * J.transpose();
+            b += - error * J;
+            cost += error * error;
         }
 
         if (iter == 0)
-            u = (1e-8)*max( H(0, 0), H(1, 1) );
-        // u = (1) * abs(max(H(0, 0), H(1, 1)));
+            u = (1e-8)*max( H(0, 0), max(H(1, 1), H(2, 2)));
 
-        H = H + ( u * Eigen::MatrixXd::Identity(2, 2));
+        //LOG(WARNING) << "u = " << u;
+        H = H + ( u * Eigen::MatrixXd::Identity(3, 3));
         //  solver update
-        Eigen::Vector2d dx = H.ldlt().solve(b);
+        Eigen::Vector3d dx = H.ldlt().solve(b);
 
-        // Matrix<double ,1,1> L ;
-        Eigen::Matrix<double,1,1> L;
+        Eigen::Matrix<double,1,1> L;    // 分母
         L(0,0) = 0.5 * dx.transpose() * (u * dx + b);
 
         // try to update
         double new_ae = ae + dx[0];
         double new_be = be + dx[1];
-
+        double new_ce = ce + dx[2];
+        //LOG(WARNING) << "dx = " << dx[0] << "\t," << dx[1] << "\t," << dx[2];
 
         // 重新计算Fx
-
+        newCost = 0;
         for(int i = 0 ; i < N ; i++ )
         {
             double xi = x_data[i], yi = y_data[i];
             double error = 0;
-            error = yi - (new_ae * xi + new_be);
-            newFx += error * error;
+            error = yi - exp(new_ae * xi * xi + new_be * xi + new_ce);
+            newCost += error * error;
         }
 
         // 没达到收敛条件则继续迭代
-        double p = (Fx - newFx) / L(0,0) ;
-        // std::cout << Fx - newFx << std::endl;
-        // std::cout << L(0,0) << std::endl;
+        //      Fx - newFx
+        // p = -------------
+        //        L(0,0)
+        double p = (cost - newCost) / L(0,0) ;
+//        LOG(INFO) << "p = " << p << "\tF = " << (cost - newCost) << "\tL = " << L;
         if (p <= 0){
-            std::cout << "Refuse the update !!! " << std::endl;
+            LOG(INFO) << "Refuse the update !!! ";
             u = v * u;
             v = 2*v;
+            LOG(INFO) << "u = " << u;
         }else{
             u = u * max( 1.0/3.0, 1 - pow((2.0*p - 1), 3));
             v = 2.0;
             ae = new_ae;
             be = new_be;
-            // Fx = newFx;
-            std::cout << " ae = " << ae << "   " << "be = " << be << std::endl;
+            ce = new_ce;
+//            LOG(WARNING) << "ae = " << ae << "\tbe = " << be << "\tce = " << ce;
+//            LOG(INFO) << "new cost = " << newCost;
         }
 
-        // 判断收敛 1
-        if (iter > 0 && sqrt(pow(dx[0], 2) + pow(dx[1], 2)) <= (sqrt(pow(new_ae, 2) + pow(new_be, 2)) + parameter_tolerance) * parameter_tolerance)
+        // 判断收敛
+        if (iter > 0 &&
+            sqrt(pow(dx[0], 2) + pow(dx[1], 2) + pow(dx[2], 2)) <=
+            (sqrt(pow(new_ae, 2) + pow(new_ce, 2) + pow(new_be, 2)) + parameter_tolerance) * parameter_tolerance
+                )
         {
-            std::cout << "Approach to LM parameter converge, itera_count = " << iter + 1 << std::endl;
-            std::cout << " ae = " << ae << "   "
-                      << "be = " << be << std::endl;
-            std::cout << "---------------------------------------------------------" << std::endl;
+            LOG(INFO) << "Approach to LM-Nielsen parameter converge, iterations count = " << iter + 1 << "\tcost = " << cost;
+            LOG(INFO) << "ae = " << ae << "\tbe = " << be << "\tce = " << ce;
+            LOG(INFO) << "---------------------------------------------------------";
             break;
         }
         //  达到迭代次数
         if (iter == iterations - 1)
         {
-            std::cout << "LM Have reach the maximum iteration num " << iter << std::endl;
+            LOG(INFO) << "LM-Nielsen Have reach the maximum iteration num " << iter;
             break;
         }
+        file << iter + 1 << "," << newCost << endl;
     }// for
+    file.close();
 }
 
-/*
-**  Robustied-LM-Nielsen
-*/
-void R_LM(const vector<double> &y_data, const vector<double> &x_data, const int N, double ae, double be)
+/**
+ * @brief Robust-LM
+ */
+void R_LM(const vector<double> &y_data, const vector<double> &x_data, int N, double ae, double be)
 {
-    std::cout << std::endl;
-    std::cout << " 开始Robust-LM 迭代 : " << std::endl;
+    LOG(INFO) << " 开始Robust-LM 迭代 : ";
     double Fx = 0, lastFx = 0; // 本次迭代的Fx和上一次迭代的Fx
     // 开始rgn迭代
     double u = 0.0;
@@ -383,16 +504,16 @@ void R_LM(const vector<double> &y_data, const vector<double> &x_data, const int 
         double new_ae = ae + dx[0];
         double new_be = be + dx[1];
 
-        std::cout << "dx = " << dx[0] <<"," << dx[1] << std::endl;
+        LOG(INFO) << "dx = " << dx[0] <<"," << dx[1];
 
         Vector2d diff = H * dx - b;
 
         //  add a diff  converge
-        std::cout << "diff = " << diff[0] << " , " << diff[1] << std::endl;
+        LOG(INFO) << "diff = " << diff[0] << " , " << diff[1];
         if ( fabs( diff[0] ) <= 1e-30 &&  fabs(diff[1])<= 1e-30 )
         {
-            std::cout << "Approach to R-LM diff converge, iter_count = " << iter + 1 << std::endl;
-            std::cout << "  ae = " << new_ae << "   " << "be = " << new_be << std::endl;
+            LOG(INFO) << "Approach to R-LM diff converge, iter_count = " << iter + 1;
+            LOG(INFO) << "  ae = " << new_ae << "   " << "be = " << new_be;
             break;
         }
 
@@ -417,40 +538,38 @@ void R_LM(const vector<double> &y_data, const vector<double> &x_data, const int 
             v = 2.0;
             ae = new_ae;
             be = new_be;
-            std::cout << "Consent  the update !!! " << ", lastFx-Fx = " << lastFx - Fx << std::endl;
-            std::cout << "  ae = " << ae << "   "<< "be = " << be << std::endl;
-            std::cout << std::endl;
+            LOG(INFO) << "Consent  the update !!! " << ", lastFx-Fx = " << lastFx - Fx;
+            LOG(INFO) << "  ae = " << ae << "   "<< "be = " << be;
         }
         if ( p <= 0)
         {
-            std::cout << "  new_ae = " << new_ae << "   "<< "new_be = " << new_be << std::endl;
-            std::cout << "Refuse the update !!! "<< ", lastFx-Fx = " << lastFx - Fx << std::endl;
-            std::cout << "  ae = " << ae << "   "<< "be = " << be << std::endl;
-            std::cout << std::endl;
+            LOG(INFO) << "  new_ae = " << new_ae << "   "<< "new_be = " << new_be;
+            LOG(INFO) << "Refuse the update !!! "<< ", lastFx-Fx = " << lastFx - Fx;
+            LOG(INFO) << "  ae = " << ae << "   "<< "be = " << be;
             u = v * u;
             v = 2 * v;
         }
 
 
-        // std::cout << b[0] << "," <<b[1] << std::endl;
+        // LOG(INFO) << b[0] << "," <<b[1];
         //  收敛条件1
         if (iter >= 0 && sqrt(pow(dx[0], 2) + pow(dx[1], 2)) <= (sqrt(pow(ae, 2) + pow(be, 2)) + parameter_tolerance) * parameter_tolerance)
         {
-            std::cout << "Approach to R-LM parameter converge, itera_count = " << iter + 1 << std::endl;
+            LOG(INFO) << "Approach to R-LM parameter converge, itera_count = " << iter + 1;
             cout << "estimated ab = " << ae << ", " << be << endl;
             break;
         }
         //  收敛条件2
         // if ( iter >= 0 && fabs(b[0]) <= 1e-2 && fabs(b[1]) <= 1e-2)
         // {
-        //     std::cout << "Approach to R-LM diff converge, iter_count = " << iter + 1 << std::endl;
+        //     LOG(INFO) << "Approach to R-LM diff converge, iter_count = " << iter + 1;
         // }
         // 达到最大迭代次数
         if (iter == iterations - 1)
         {
-            std::cout << "R_LM Have reach the maximum iteration num " << iter << std::endl;
+            LOG(INFO) << "R_LM Have reach the maximum iteration num " << iter;
             break;
         }
     } // for
-    std::cout << "Find  the x*" << std::endl;
+    LOG(INFO) << "Find  the x*";
 }

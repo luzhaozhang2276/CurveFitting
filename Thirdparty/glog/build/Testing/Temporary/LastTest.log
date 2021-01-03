@@ -1,0 +1,372 @@
+Start testing: Nov 28 14:44 CST
+----------------------------------------------------------
+1/10 Testing: demangle
+1/10 Test: demangle
+Command: "/home/lu/code/Third_party/glog/build/demangle_unittest"
+Directory: /home/lu/code/Third_party/glog/build
+"demangle" start time: Nov 28 14:44 CST
+Output:
+----------------------------------------------------------
+Passed 3 tests
+
+PASS
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"demangle" end time: Nov 28 14:44 CST
+"demangle" time elapsed: 00:00:00
+----------------------------------------------------------
+
+2/10 Testing: logging
+2/10 Test: logging
+Command: "/home/lu/code/Third_party/glog/build/logging_unittest"
+Directory: /home/lu/code/Third_party/glog/build
+"logging" start time: Nov 28 14:44 CST
+Output:
+----------------------------------------------------------
+F20201128 14:44:43.418526 27951 logging_unittest.cc:301] unexpected new
+*** Check failure stack trace: ***
+F00000000 00:00:00.000000 27951 logging_unittest.cc:455] RAW: Check false failed: failure 1
+F00000000 00:00:00.000000 27951 logging_unittest.cc:457] RAW: Check 1 == 2 failed: failure 2
+F20201128 14:44:43.418787 27951 logging_unittest.cc:612] CHECK_STREQ failed: __null == "this" ( vs. this)
+*** Check failure stack trace: ***
+F20201128 14:44:43.418787 27951 logging_unittest.cc:612] CHECK_STREQ failed: __null == "this" ( vs. this)F20201128 14:44:43.418813 27951 logging_unittest.cc:613] CHECK_STREQ failed: "this" == "siht" (this vs. siht)
+*** Check failure stack trace: ***
+F20201128 14:44:43.418787 27951 logging_unittest.cc:612] CHECK_STREQ failed: __null == "this" ( vs. this)F20201128 14:44:43.418813 27951 logging_unittest.cc:613] CHECK_STREQ failed: "this" == "siht" (this vs. siht)F20201128 14:44:43.418829 27951 logging_unittest.cc:614] CHECK_STRCASEEQ failed: __null == "siht" ( vs. siht)
+*** Check failure stack trace: ***
+F20201128 14:44:43.418787 27951 logging_unittest.cc:612] CHECK_STREQ failed: __null == "this" ( vs. this)F20201128 14:44:43.418813 27951 logging_unittest.cc:613] CHECK_STREQ failed: "this" == "siht" (this vs. siht)F20201128 14:44:43.418829 27951 logging_unittest.cc:614] CHECK_STRCASEEQ failed: __null == "siht" ( vs. siht)F20201128 14:44:43.418844 27951 logging_unittest.cc:615] CHECK_STRCASEEQ failed: "this" == "siht" (this vs. siht)
+*** Check failure stack trace: ***
+F20201128 14:44:43.418787 27951 logging_unittest.cc:612] CHECK_STREQ failed: __null == "this" ( vs. this)F20201128 14:44:43.418813 27951 logging_unittest.cc:613] CHECK_STREQ failed: "this" == "siht" (this vs. siht)F20201128 14:44:43.418829 27951 logging_unittest.cc:614] CHECK_STRCASEEQ failed: __null == "siht" ( vs. siht)F20201128 14:44:43.418844 27951 logging_unittest.cc:615] CHECK_STRCASEEQ failed: "this" == "siht" (this vs. siht)F20201128 14:44:43.418859 27951 logging_unittest.cc:616] CHECK_STRNE failed: __null != __null ( vs. )
+*** Check failure stack trace: ***
+F20201128 14:44:43.418787 27951 logging_unittest.cc:612] CHECK_STREQ failed: __null == "this" ( vs. this)F20201128 14:44:43.418813 27951 logging_unittest.cc:613] CHECK_STREQ failed: "this" == "siht" (this vs. siht)F20201128 14:44:43.418829 27951 logging_unittest.cc:614] CHECK_STRCASEEQ failed: __null == "siht" ( vs. siht)F20201128 14:44:43.418844 27951 logging_unittest.cc:615] CHECK_STRCASEEQ failed: "this" == "siht" (this vs. siht)F20201128 14:44:43.418859 27951 logging_unittest.cc:616] CHECK_STRNE failed: __null != __null ( vs. )F20201128 14:44:43.418874 27951 logging_unittest.cc:617] CHECK_STRNE failed: "this" != "this" (this vs. this)
+*** Check failure stack trace: ***
+F20201128 14:44:43.418787 27951 logging_unittest.cc:612] CHECK_STREQ failed: __null == "this" ( vs. this)F20201128 14:44:43.418813 27951 logging_unittest.cc:613] CHECK_STREQ failed: "this" == "siht" (this vs. siht)F20201128 14:44:43.418829 27951 logging_unittest.cc:614] CHECK_STRCASEEQ failed: __null == "siht" ( vs. siht)F20201128 14:44:43.418844 27951 logging_unittest.cc:615] CHECK_STRCASEEQ failed: "this" == "siht" (this vs. siht)F20201128 14:44:43.418859 27951 logging_unittest.cc:616] CHECK_STRNE failed: __null != __null ( vs. )F20201128 14:44:43.418874 27951 logging_unittest.cc:617] CHECK_STRNE failed: "this" != "this" (this vs. this)F20201128 14:44:43.418889 27951 logging_unittest.cc:618] CHECK_STREQ failed: (string("a")+"b").c_str() == "abc" (ab vs. abc)
+*** Check failure stack trace: ***
+F20201128 14:44:43.418787 27951 logging_unittest.cc:612] CHECK_STREQ failed: __null == "this" ( vs. this)F20201128 14:44:43.418813 27951 logging_unittest.cc:613] CHECK_STREQ failed: "this" == "siht" (this vs. siht)F20201128 14:44:43.418829 27951 logging_unittest.cc:614] CHECK_STRCASEEQ failed: __null == "siht" ( vs. siht)F20201128 14:44:43.418844 27951 logging_unittest.cc:615] CHECK_STRCASEEQ failed: "this" == "siht" (this vs. siht)F20201128 14:44:43.418859 27951 logging_unittest.cc:616] CHECK_STRNE failed: __null != __null ( vs. )F20201128 14:44:43.418874 27951 logging_unittest.cc:617] CHECK_STRNE failed: "this" != "this" (this vs. this)F20201128 14:44:43.418889 27951 logging_unittest.cc:618] CHECK_STREQ failed: (string("a")+"b").c_str() == "abc" (ab vs. abc)F20201128 14:44:43.418963 27951 logging_unittest.cc:633] Check failed: 'static_cast<void *>(NULL)' Must be non NULL 
+*** Check failure stack trace: ***
+Passed 8 tests
+
+PASS
+I20201128 14:44:43.680405 27951 googletest.h:505] Diff was successful
+==== Test setting log file basename
+==== Test setting log file basename without timestamp and appending properly
+I20201128 14:44:43.681738 27951 logging_unittest.cc:729] message to new base, appending to preexisting file
+==== Test setting log file basename and two processes writing - second should fail
+I20201128 14:44:43.682504 27951 logging_unittest.cc:752] message to new base, parent
+Could not create log file: Resource temporarily unavailable
+COULD NOT CREATE LOGFILE '20201128-144443.27953'!
+I20201128 14:44:43.683208 27953 logging_unittest.cc:758] message to new base, child - should only appear on STDERR not on the file
+==== Test setting log file symlink
+I20201128 14:44:43.685425 27951 logging_unittest.cc:785] message to new symlink
+==== Test setting log file extension
+I20201128 14:44:43.686261 27951 logging_unittest.cc:801] message to new extension
+==== Test log wrapper
+I20201128 14:44:43.686933 27951 logging_unittest.cc:837] Send to wrapped logger
+==== Test errno preservation
+I20201128 14:44:43.686959 27951 logging_unittest.cc:256] foo bar 10 3.4
+E20201128 14:44:43.686981 27951 logging_unittest.cc:260] Plog every 2, iteration 11: Success [0]
+W20201128 14:44:43.686998 27951 logging_unittest.cc:266] Log if every 5, iteration 11
+I20201128 14:44:43.687009 27951 logging_unittest.cc:269] Log if every 1, iteration 11
+I20201128 14:44:43.687019 27951 logging_unittest.cc:269] Log if every 1, iteration 12
+E20201128 14:44:43.687042 27951 logging_unittest.cc:270] Log if less than 3 every 2, iteration 12
+E20201128 14:44:43.687053 27951 logging_unittest.cc:260] Plog every 2, iteration 13: No such file or directory [2]
+E20201128 14:44:43.687072 27951 logging_unittest.cc:263] Log every 3, iteration 13
+E20201128 14:44:43.687083 27951 logging_unittest.cc:264] Log every 4, iteration 13
+I20201128 14:44:43.687098 27951 logging_unittest.cc:269] Log if every 1, iteration 13
+I20201128 14:44:43.687108 27951 logging_unittest.cc:269] Log if every 1, iteration 14
+E20201128 14:44:43.687119 27951 logging_unittest.cc:260] Plog every 2, iteration 15: Interrupted system call [4]
+I20201128 14:44:43.687135 27951 logging_unittest.cc:269] Log if every 1, iteration 15
+E20201128 14:44:43.687145 27951 logging_unittest.cc:263] Log every 3, iteration 16
+W20201128 14:44:43.687155 27951 logging_unittest.cc:266] Log if every 5, iteration 16
+I20201128 14:44:43.687165 27951 logging_unittest.cc:269] Log if every 1, iteration 16
+E20201128 14:44:43.687175 27951 logging_unittest.cc:260] Plog every 2, iteration 17: No such device or address [6]
+E20201128 14:44:43.687192 27951 logging_unittest.cc:264] Log every 4, iteration 17
+I20201128 14:44:43.687202 27951 logging_unittest.cc:269] Log if every 1, iteration 17
+I20201128 14:44:43.687212 27951 logging_unittest.cc:269] Log if every 1, iteration 18
+E20201128 14:44:43.687222 27951 logging_unittest.cc:260] Plog every 2, iteration 19: Exec format error [8]
+E20201128 14:44:43.687239 27951 logging_unittest.cc:263] Log every 3, iteration 19
+I20201128 14:44:43.687250 27951 logging_unittest.cc:269] Log if every 1, iteration 19
+I20201128 14:44:43.687260 27951 logging_unittest.cc:269] Log if every 1, iteration 20
+W20201128 14:44:43.687278 27951 logging_unittest.cc:273] log_if this
+I20201128 14:44:43.687288 27951 logging_unittest.cc:277] array
+I20201128 14:44:43.687297 27951 logging_unittest.cc:279] const array
+E20201128 14:44:43.687307 27951 logging_unittest.cc:281] foo 1000 0000001000 3e8
+E20201128 14:44:43.687336 27951 logging_unittest.cc:288] inner
+E20201128 14:44:43.687325 27951 logging_unittest.cc:285] outer
+no prefix
+==== Test log truncation
+I20201128 14:44:43.687463 27951 logging.cc:2289] Truncating /tmp/truncatefile to 10 bytes
+I20201128 14:44:44.172546 27951 logging.cc:2289] Truncating /tmp/truncatefile to 4096 bytes
+E20201128 14:44:44.175276 27951 logging.cc:2272] Unable to open /tmp/truncatefile.link: Too many levels of symbolic links [40]
+I20201128 14:44:44.175380 27951 logging.cc:2289] Truncating /proc/self/fd/5 to 10 bytes
+PASS
+<end of output>
+Test time =   0.76 sec
+----------------------------------------------------------
+Test Passed.
+"logging" end time: Nov 28 14:44 CST
+"logging" time elapsed: 00:00:00
+----------------------------------------------------------
+
+3/10 Testing: signalhandler
+3/10 Test: signalhandler
+Command: "/home/lu/code/Third_party/glog/build/signalhandler_unittest"
+Directory: /home/lu/code/Third_party/glog/build
+"signalhandler" start time: Nov 28 14:44 CST
+Output:
+----------------------------------------------------------
+OK
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"signalhandler" end time: Nov 28 14:44 CST
+"signalhandler" time elapsed: 00:00:00
+----------------------------------------------------------
+
+4/10 Testing: stacktrace
+4/10 Test: stacktrace
+Command: "/home/lu/code/Third_party/glog/build/stacktrace_unittest"
+Directory: /home/lu/code/Third_party/glog/build
+"stacktrace" start time: Nov 28 14:44 CST
+Output:
+----------------------------------------------------------
+Obtained 9 stack frames.
+Obtained 9 stack frames.
+/home/lu/code/Third_party/glog/build/stacktrace_unittest(+0x106d1) [0x5578e2f2b6d1] 0x5578e2f2b6d1
+/home/lu/code/Third_party/glog/build/stacktrace_unittest(+0x10b80) [0x5578e2f2bb80] 0x5578e2f2bb80
+/home/lu/code/Third_party/glog/build/stacktrace_unittest(+0x10d60) [0x5578e2f2bd60] 0x5578e2f2bd60
+/home/lu/code/Third_party/glog/build/stacktrace_unittest(+0x10f40) [0x5578e2f2bf40] 0x5578e2f2bf40
+/home/lu/code/Third_party/glog/build/stacktrace_unittest(+0x11120) [0x5578e2f2c120] 0x5578e2f2c120
+/home/lu/code/Third_party/glog/build/stacktrace_unittest(_Z15CheckStackTracei+0xcf) [0x5578e2f2c22b] 0x5578e2f2c22b
+/home/lu/code/Third_party/glog/build/stacktrace_unittest(main+0x2f) [0x5578e2f2c28a] 0x5578e2f2c28a
+/lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0xe7) [0x7f06ef68ebf7] 0x7f06ef68ebf7
+/home/lu/code/Third_party/glog/build/stacktrace_unittest(_start+0x2a) [0x5578e2f2b2ba] 0x5578e2f2b2ba
+CheckStackTrace() addr: 0x5578e2f2c15c
+Backtrace 0: expected: 0x5578e2f2b6bb..0x5578e2f2b990  actual: 0x5578e2f2b6d1 ... OK
+Backtrace 1: expected: 0x5578e2f2bb6f..0x5578e2f2bb86  actual: 0x5578e2f2bb80 ... OK
+Backtrace 2: expected: 0x5578e2f2bd4a..0x5578e2f2bd66  actual: 0x5578e2f2bd60 ... OK
+Backtrace 3: expected: 0x5578e2f2bf2a..0x5578e2f2bf46  actual: 0x5578e2f2bf40 ... OK
+Backtrace 4: expected: 0x5578e2f2c10a..0x5578e2f2c126  actual: 0x5578e2f2c120 ... OK
+Backtrace 5: expected: 0x5578e2f2c215..0x5578e2f2c231  actual: 0x5578e2f2c22b ... OK
+PASS
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"stacktrace" end time: Nov 28 14:44 CST
+"stacktrace" time elapsed: 00:00:00
+----------------------------------------------------------
+
+5/10 Testing: stl_logging
+5/10 Test: stl_logging
+Command: "/home/lu/code/Third_party/glog/build/stl_logging_unittest"
+Directory: /home/lu/code/Third_party/glog/build
+"stl_logging" start time: Nov 28 14:44 CST
+Output:
+----------------------------------------------------------
+PASS
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"stl_logging" end time: Nov 28 14:44 CST
+"stl_logging" time elapsed: 00:00:00
+----------------------------------------------------------
+
+6/10 Testing: symbolize
+6/10 Test: symbolize
+Command: "/home/lu/code/Third_party/glog/build/symbolize_unittest"
+Directory: /home/lu/code/Third_party/glog/build
+"symbolize" start time: Nov 28 14:44 CST
+Output:
+----------------------------------------------------------
+Test case TestWithPCInsideNonInlineFunction passed.
+Test case TestWithReturnAddress passed.
+Passed 2 tests
+
+PASS
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"symbolize" end time: Nov 28 14:44 CST
+"symbolize" time elapsed: 00:00:00
+----------------------------------------------------------
+
+7/10 Testing: cmake_package_config_init
+7/10 Test: cmake_package_config_init
+Command: "/usr/local/bin/cmake" "-DTEST_BINARY_DIR=/home/lu/code/Third_party/glog/build/test_package_config" "-DINITIAL_CACHE=/home/lu/code/Third_party/glog/build/test_package_config/glog_package_config_initial_cache.cmake" "-DCACHEVARS=set (BUILD_SHARED_LIBS OFF CACHE BOOL "Build shared libraries")
+set (BUILD_TESTING ON CACHE BOOL "Build the testing tree.")
+set (BZRCOMMAND "BZRCOMMAND-NOTFOUND" CACHE FILEPATH "Path to a program.")
+set (CMAKE_ADDR2LINE "/usr/bin/addr2line" CACHE FILEPATH "Path to a program.")
+set (CMAKE_AR "/usr/bin/ar" CACHE FILEPATH "Path to a program.")
+set (CMAKE_AR "/usr/bin/ar" CACHE FILEPATH "Path to a program.")
+set (CMAKE_COLOR_MAKEFILE ON CACHE BOOL "Enable/Disable color output during build.")
+set (CMAKE_CXX_COMPILER "/usr/bin/c++" CACHE FILEPATH "CXX compiler")
+set (CMAKE_CXX_COMPILER "/usr/bin/c++" CACHE FILEPATH "CXX compiler")
+set (CMAKE_CXX_COMPILER_AR "/usr/bin/gcc-ar-7" CACHE FILEPATH "A wrapper around 'ar' adding the appropriate '--plugin' option for the GCC compiler")
+set (CMAKE_CXX_COMPILER_AR "/usr/bin/gcc-ar-7" CACHE FILEPATH "A wrapper around 'ar' adding the appropriate '--plugin' option for the GCC compiler")
+set (CMAKE_CXX_COMPILER_RANLIB "/usr/bin/gcc-ranlib-7" CACHE FILEPATH "A wrapper around 'ranlib' adding the appropriate '--plugin' option for the GCC compiler")
+set (CMAKE_CXX_COMPILER_RANLIB "/usr/bin/gcc-ranlib-7" CACHE FILEPATH "A wrapper around 'ranlib' adding the appropriate '--plugin' option for the GCC compiler")
+set (CMAKE_CXX_FLAGS_DEBUG "-g" CACHE STRING "Flags used by the CXX compiler during DEBUG builds.")
+set (CMAKE_CXX_FLAGS_MINSIZEREL "-Os -DNDEBUG" CACHE STRING "Flags used by the CXX compiler during MINSIZEREL builds.")
+set (CMAKE_CXX_FLAGS_RELEASE "-O3 -DNDEBUG" CACHE STRING "Flags used by the CXX compiler during RELEASE builds.")
+set (CMAKE_CXX_FLAGS_RELWITHDEBINFO "-O2 -g -DNDEBUG" CACHE STRING "Flags used by the CXX compiler during RELWITHDEBINFO builds.")
+set (CMAKE_C_COMPILER "/usr/bin/cc" CACHE FILEPATH "C compiler")
+set (CMAKE_C_COMPILER "/usr/bin/cc" CACHE FILEPATH "C compiler")
+set (CMAKE_C_COMPILER_AR "/usr/bin/gcc-ar-7" CACHE FILEPATH "A wrapper around 'ar' adding the appropriate '--plugin' option for the GCC compiler")
+set (CMAKE_C_COMPILER_AR "/usr/bin/gcc-ar-7" CACHE FILEPATH "A wrapper around 'ar' adding the appropriate '--plugin' option for the GCC compiler")
+set (CMAKE_C_COMPILER_RANLIB "/usr/bin/gcc-ranlib-7" CACHE FILEPATH "A wrapper around 'ranlib' adding the appropriate '--plugin' option for the GCC compiler")
+set (CMAKE_C_COMPILER_RANLIB "/usr/bin/gcc-ranlib-7" CACHE FILEPATH "A wrapper around 'ranlib' adding the appropriate '--plugin' option for the GCC compiler")
+set (CMAKE_C_FLAGS_DEBUG "-g" CACHE STRING "Flags used by the C compiler during DEBUG builds.")
+set (CMAKE_C_FLAGS_MINSIZEREL "-Os -DNDEBUG" CACHE STRING "Flags used by the C compiler during MINSIZEREL builds.")
+set (CMAKE_C_FLAGS_RELEASE "-O3 -DNDEBUG" CACHE STRING "Flags used by the C compiler during RELEASE builds.")
+set (CMAKE_C_FLAGS_RELWITHDEBINFO "-O2 -g -DNDEBUG" CACHE STRING "Flags used by the C compiler during RELWITHDEBINFO builds.")
+set (CMAKE_DLLTOOL "CMAKE_DLLTOOL-NOTFOUND" CACHE FILEPATH "Path to a program.")
+set (CMAKE_INSTALL_BINDIR "bin" CACHE PATH "User executables (bin)")
+set (CMAKE_INSTALL_DATAROOTDIR "share" CACHE PATH "Read-only architecture-independent data root (share)")
+set (CMAKE_INSTALL_INCLUDEDIR "include" CACHE PATH "C header files (include)")
+set (CMAKE_INSTALL_LIBDIR "lib" CACHE PATH "Object code libraries (lib)")
+set (CMAKE_INSTALL_LIBEXECDIR "libexec" CACHE PATH "Program executables (libexec)")
+set (CMAKE_INSTALL_LOCALSTATEDIR "var" CACHE PATH "Modifiable single-machine data (var)")
+set (CMAKE_INSTALL_OLDINCLUDEDIR "/usr/include" CACHE PATH "C header files for non-gcc (/usr/include)")
+set (CMAKE_INSTALL_PREFIX "/usr/local" CACHE PATH "Install path prefix, prepended onto install directories.")
+set (CMAKE_INSTALL_SBINDIR "sbin" CACHE PATH "System admin executables (sbin)")
+set (CMAKE_INSTALL_SHAREDSTATEDIR "com" CACHE PATH "Modifiable architecture-independent data (com)")
+set (CMAKE_INSTALL_SYSCONFDIR "etc" CACHE PATH "Read-only single-machine data (etc)")
+set (CMAKE_LINKER "/usr/bin/ld" CACHE FILEPATH "Path to a program.")
+set (CMAKE_LINKER "/usr/bin/ld" CACHE FILEPATH "Path to a program.")
+set (CMAKE_NM "/usr/bin/nm" CACHE FILEPATH "Path to a program.")
+set (CMAKE_OBJCOPY "/usr/bin/objcopy" CACHE FILEPATH "Path to a program.")
+set (CMAKE_OBJDUMP "/usr/bin/objdump" CACHE FILEPATH "Path to a program.")
+set (CMAKE_RANLIB "/usr/bin/ranlib" CACHE FILEPATH "Path to a program.")
+set (CMAKE_RANLIB "/usr/bin/ranlib" CACHE FILEPATH "Path to a program.")
+set (CMAKE_READELF "/usr/bin/readelf" CACHE FILEPATH "Path to a program.")
+set (CMAKE_SKIP_INSTALL_RPATH NO CACHE BOOL "If set, runtime paths are not added when installing shared libraries, but are added when building.")
+set (CMAKE_SKIP_RPATH NO CACHE BOOL "If set, runtime paths are not added when using shared libraries.")
+set (CMAKE_STRIP "/usr/bin/strip" CACHE FILEPATH "Path to a program.")
+set (CMAKE_VERBOSE_MAKEFILE FALSE CACHE BOOL "If this value is on, makefiles will be generated without the .SILENT directive, and all commands will be echoed to the console during the make.  This is useful for debugging only. With Visual Studio IDE projects all commands are done without /nologo.")
+set (COVERAGE_COMMAND "/usr/bin/gcov" CACHE FILEPATH "Path to the coverage program that CTest uses for performing coverage inspection")
+set (COVERAGE_EXTRA_FLAGS "-l" CACHE STRING "Extra command line flags to pass to the coverage tool")
+set (CPACK_BINARY_DEB OFF CACHE BOOL "Enable to build Debian packages")
+set (CPACK_BINARY_FREEBSD OFF CACHE BOOL "Enable to build FreeBSD packages")
+set (CPACK_BINARY_IFW OFF CACHE BOOL "Enable to build IFW packages")
+set (CPACK_BINARY_NSIS OFF CACHE BOOL "Enable to build NSIS packages")
+set (CPACK_BINARY_RPM OFF CACHE BOOL "Enable to build RPM packages")
+set (CPACK_BINARY_STGZ ON CACHE BOOL "Enable to build STGZ packages")
+set (CPACK_BINARY_TBZ2 OFF CACHE BOOL "Enable to build TBZ2 packages")
+set (CPACK_BINARY_TGZ ON CACHE BOOL "Enable to build TGZ packages")
+set (CPACK_BINARY_TXZ OFF CACHE BOOL "Enable to build TXZ packages")
+set (CPACK_BINARY_TZ ON CACHE BOOL "Enable to build TZ packages")
+set (CPACK_SOURCE_RPM OFF CACHE BOOL "Enable to build RPM source packages")
+set (CPACK_SOURCE_TBZ2 ON CACHE BOOL "Enable to build TBZ2 source packages")
+set (CPACK_SOURCE_TGZ ON CACHE BOOL "Enable to build TGZ source packages")
+set (CPACK_SOURCE_TXZ ON CACHE BOOL "Enable to build TXZ source packages")
+set (CPACK_SOURCE_TZ ON CACHE BOOL "Enable to build TZ source packages")
+set (CPACK_SOURCE_ZIP OFF CACHE BOOL "Enable to build ZIP source packages")
+set (CTEST_SUBMIT_RETRY_COUNT "3" CACHE STRING "How many times to retry timed-out CTest submissions.")
+set (CTEST_SUBMIT_RETRY_DELAY "5" CACHE STRING "How long to wait between timed-out CTest submissions.")
+set (CVSCOMMAND "CVSCOMMAND-NOTFOUND" CACHE FILEPATH "Path to a program.")
+set (CVS_UPDATE_OPTIONS "-d -A -P" CACHE STRING "Options passed to the cvs update command.")
+set (DART_TESTING_TIMEOUT "1500" CACHE STRING "Maximum time allowed before CTest will kill the test.")
+set (GITCOMMAND "/usr/bin/git" CACHE FILEPATH "Path to a program.")
+set (HGCOMMAND "HGCOMMAND-NOTFOUND" CACHE FILEPATH "Path to a program.")
+set (MAKECOMMAND "/usr/local/bin/cmake --build . --config \"${CTEST_CONFIGURATION_TYPE}\" -- -i" CACHE STRING "Command to build the project")
+set (MEMORYCHECK_COMMAND "/usr/local/cuda-10.1/bin/cuda-memcheck" CACHE FILEPATH "Path to the memory checking command, used for memory error detection.")
+set (P4COMMAND "P4COMMAND-NOTFOUND" CACHE FILEPATH "Path to a program.")
+set (PRINT_UNSYMBOLIZED_STACK_TRACES OFF CACHE BOOL "Print file offsets in traces instead of symbolizing")
+set (SITE "lu" CACHE STRING "Name of the computer/site where compile is being run")
+set (SLURM_SBATCH_COMMAND "SLURM_SBATCH_COMMAND-NOTFOUND" CACHE FILEPATH "Path to the SLURM sbatch executable")
+set (SLURM_SRUN_COMMAND "SLURM_SRUN_COMMAND-NOTFOUND" CACHE FILEPATH "Path to the SLURM srun executable")
+set (SVNCOMMAND "SVNCOMMAND-NOTFOUND" CACHE FILEPATH "Path to a program.")
+set (Unwind_INCLUDE_DIR "Unwind_INCLUDE_DIR-NOTFOUND" CACHE PATH "unwind include directory")
+set (Unwind_LIBRARY "Unwind_LIBRARY-NOTFOUND" CACHE FILEPATH "unwind library")
+set (Unwind_PLATFORM_LIBRARY "Unwind_PLATFORM_LIBRARY-NOTFOUND" CACHE FILEPATH "unwind library platform")
+set (WITH_GFLAGS ON CACHE BOOL "Use gflags")
+set (WITH_PKGCONFIG ON CACHE BOOL "Enable pkg-config support")
+set (WITH_SYMBOLIZE ON CACHE BOOL "Enable symbolize module")
+set (WITH_THREADS ON CACHE BOOL "Enable multithreading support")
+set (WITH_TLS ON CACHE BOOL "Enable Thread Local Storage (TLS) support")
+set (WITH_UNWIND ON CACHE BOOL "Enable libunwind support")
+set (gflags_DIR "/usr/lib/x86_64-linux-gnu/cmake/gflags" CACHE PATH "The directory containing a CMake configuration file for gflags.")
+" "-P" "/home/lu/code/Third_party/glog/cmake/TestInitPackageConfig.cmake"
+Directory: /home/lu/code/Third_party/glog/build
+"cmake_package_config_init" start time: Nov 28 14:44 CST
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"cmake_package_config_init" end time: Nov 28 14:44 CST
+"cmake_package_config_init" time elapsed: 00:00:00
+----------------------------------------------------------
+
+8/10 Testing: cmake_package_config_generate
+8/10 Test: cmake_package_config_generate
+Command: "/usr/local/bin/cmake" "-DPATH=/opt/ros/melodic/bin:/home/lu/software/MATLAB/R2017a/bin:/home/lu/software/deepin-wine-ubuntu:/home/lu/software/clion-2020.2.4/bin:/usr/local/cuda-10.1/bin:/home/lu/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin" "-DINITIAL_CACHE=/home/lu/code/Third_party/glog/build/test_package_config/glog_package_config_initial_cache.cmake" "-DTEST_BINARY_DIR=/home/lu/code/Third_party/glog/build/test_package_config/working_config" "-DSOURCE_DIR=/home/lu/code/Third_party/glog/src/package_config_unittest/working_config" "-DPACKAGE_DIR=/home/lu/code/Third_party/glog/build" "-DGENERATOR=Unix Makefiles" "-P" "/home/lu/code/Third_party/glog/cmake/TestPackageConfig.cmake"
+Directory: /home/lu/code/Third_party/glog/build
+"cmake_package_config_generate" start time: Nov 28 14:44 CST
+Output:
+----------------------------------------------------------
+loading initial cache file /home/lu/code/Third_party/glog/build/test_package_config/glog_package_config_initial_cache.cmake
+-- The C compiler identification is GNU 7.5.0
+-- The CXX compiler identification is GNU 7.5.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/lu/code/Third_party/glog/build/test_package_config/working_config
+<end of output>
+Test time =   0.24 sec
+----------------------------------------------------------
+Test Passed.
+"cmake_package_config_generate" end time: Nov 28 14:44 CST
+"cmake_package_config_generate" time elapsed: 00:00:00
+----------------------------------------------------------
+
+9/10 Testing: cmake_package_config_build
+9/10 Test: cmake_package_config_build
+Command: "/usr/local/bin/cmake" "--build" "/home/lu/code/Third_party/glog/build/test_package_config/working_config"
+Directory: /home/lu/code/Third_party/glog/build
+"cmake_package_config_build" start time: Nov 28 14:44 CST
+Output:
+----------------------------------------------------------
+[35m[1mScanning dependencies of target glog_package_config[0m
+[ 50%] [32mBuilding CXX object CMakeFiles/glog_package_config.dir/glog_package_config.cc.o[0m
+[100%] [32m[1mLinking CXX executable glog_package_config[0m
+[100%] Built target glog_package_config
+<end of output>
+Test time =   0.30 sec
+----------------------------------------------------------
+Test Passed.
+"cmake_package_config_build" end time: Nov 28 14:44 CST
+"cmake_package_config_build" time elapsed: 00:00:00
+----------------------------------------------------------
+
+10/10 Testing: cmake_package_config_cleanup
+10/10 Test: cmake_package_config_cleanup
+Command: "/usr/local/bin/cmake" "-E" "remove_directory" "/home/lu/code/Third_party/glog/build/test_package_config"
+Directory: /home/lu/code/Third_party/glog/build
+"cmake_package_config_cleanup" start time: Nov 28 14:44 CST
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"cmake_package_config_cleanup" end time: Nov 28 14:44 CST
+"cmake_package_config_cleanup" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Nov 28 14:44 CST
