@@ -10,20 +10,30 @@ dataResult = fileResult.readlines()
 fileErrorGN = open('/home/lu/code/CLionProjects/CurveFitting/scripts/error-GN.txt')
 dataErrorGN = fileErrorGN.readlines()
 
+fileErrorRGN = open('/home/lu/code/CLionProjects/CurveFitting/scripts/error-RGN.txt')
+dataErrorRGN = fileErrorRGN.readlines()
+
 fileErrorLM = open('/home/lu/code/CLionProjects/CurveFitting/scripts/error-LM.txt')
 dataErrorLM = fileErrorLM.readlines()
 
 fileErrorLMN = open('/home/lu/code/CLionProjects/CurveFitting/scripts/error-LM-N.txt')
 dataErrorLMN = fileErrorLMN.readlines()
 
+fileErrorRLM = open('/home/lu/code/CLionProjects/CurveFitting/scripts/error-RLM.txt')
+dataErrorRLM = fileErrorRLM.readlines()
+
 points_x = []   # points
 points_y = []
 gn_iter = []    # GN
 gn_error = []
+rgn_iter = []   # RGN
+rgn_error = []
 lm_iter = []    # LM
 lm_error = []
 lmn_iter = []   # LM-Nielsen
 lmn_error = []
+rlm_iter = []   # RLM
+rlm_error = []
 
 for num in dataPoints:
     points_x.append(float(num.split(',')[0]))
@@ -33,6 +43,10 @@ for num in dataErrorGN:
     gn_iter.append(float(num.split(',')[0]))
     gn_error.append(float(num.split(',')[1]))
 
+for num in dataErrorRGN:
+    rgn_iter.append(float(num.split(',')[0]))
+    rgn_error.append(float(num.split(',')[1]))
+
 for num in dataErrorLM:
     lm_iter.append(float(num.split(',')[0]))
     lm_error.append(float(num.split(',')[1]))
@@ -40,6 +54,10 @@ for num in dataErrorLM:
 for num in dataErrorLMN:
     lmn_iter.append(float(num.split(',')[0]))
     lmn_error.append(float(num.split(',')[1]))
+
+for num in dataErrorRLM:
+    rlm_iter.append(float(num.split(',')[0]))
+    rlm_error.append(float(num.split(',')[1]))
 
 x = np.linspace(0, 1, 1000)
 ar, br, cr = 1.0, 2.0, 1.0
@@ -67,8 +85,12 @@ plt.xlabel('iter')
 plt.ylabel('error')
 plt.plot(gn_iter, gn_error, linewidth=0.5, c='r')
 plt.scatter(gn_iter, gn_error, s=5, c='r', marker='o', alpha=0.5, label='GN')
+plt.plot(rgn_iter, rgn_error, linewidth=0.5, c='r')
+plt.scatter(rgn_iter, rgn_error, s=5, c='r', marker='o', alpha=0.5, label='RGN')
 plt.plot(lm_iter, lm_error, linewidth=0.5, c='b')
 plt.scatter(lm_iter, lm_error, s=5, c='b', marker='^', alpha=0.5, label='LM')
+plt.plot(rlm_iter, rlm_error, linewidth=0.5, c='b')
+plt.scatter(rlm_iter, rlm_error, s=5, c='b', marker='^', alpha=0.5, label='RLM')
 plt.plot(lmn_iter, lmn_error, linewidth=0.5, c='g')
 plt.scatter(lmn_iter, lmn_error, s=5, c='g', marker='x', alpha=0.5, label='LMN')
 plt.legend(loc='best')
