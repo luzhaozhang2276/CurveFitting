@@ -22,18 +22,23 @@ dataErrorLMN = fileErrorLMN.readlines()
 fileErrorRLM = open('/home/lu/code/CLionProjects/CurveFitting/scripts/error-RLM.txt')
 dataErrorRLM = fileErrorRLM.readlines()
 
-points_x = []   # points
+fileErrorCERES = open('/home/lu/code/CLionProjects/CurveFitting/scripts/error-ceres.txt')
+dataErrorCERES = fileErrorCERES.readlines()
+
+points_x = []       # points
 points_y = []
-gn_iter = []    # GN
+gn_iter = []        # GN
 gn_error = []
-rgn_iter = []   # RGN
+rgn_iter = []       # RGN
 rgn_error = []
-lm_iter = []    # LM
+lm_iter = []        # LM
 lm_error = []
-lmn_iter = []   # LM-Nielsen
+lmn_iter = []       # LM-Nielsen
 lmn_error = []
-rlm_iter = []   # RLM
+rlm_iter = []       # RLM
 rlm_error = []
+ceres_iter = []     # CERES
+ceres_error = []
 
 for num in dataPoints:
     points_x.append(float(num.split(',')[0]))
@@ -58,6 +63,10 @@ for num in dataErrorLMN:
 for num in dataErrorRLM:
     rlm_iter.append(float(num.split(',')[0]))
     rlm_error.append(float(num.split(',')[1]))
+
+for num in dataErrorCERES:
+    ceres_iter.append(float(num.split(',')[0]))
+    ceres_error.append(float(num.split(',')[1]))
 
 x = np.linspace(0, 1, 1000)
 ar, br, cr = 1.0, 2.0, 1.0
@@ -93,6 +102,8 @@ plt.plot(rlm_iter, rlm_error, linewidth=0.5, c='b')
 plt.scatter(rlm_iter, rlm_error, s=5, c='b', marker='^', alpha=0.5, label='RLM')
 plt.plot(lmn_iter, lmn_error, linewidth=0.5, c='g')
 plt.scatter(lmn_iter, lmn_error, s=5, c='g', marker='x', alpha=0.5, label='LMN')
+plt.plot(ceres_iter, ceres_error, linewidth=0.5, c='g')
+plt.scatter(ceres_iter, ceres_error, s=5, c='g', marker='x', alpha=0.5, label='CERES')
 plt.legend(loc='best')
 # show
 plt.show()

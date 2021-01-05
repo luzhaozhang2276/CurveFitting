@@ -1,95 +1,12 @@
-#include <iostream>
-#include <vector>
-#include <cstdlib>
-#include <ctime>
-//#include <fstream>
+//
+// Created by lu on 2021/1/5.
+//
 
-#include <opencv2/opencv.hpp>
-#include <Eigen/Core>
-#include <Eigen/Dense>
-
-#include "GLogHelper.h"
-
-// #define random(x)  rand( x)/RAND_MAX
+#include "optimization.h"
+//#include "GLogHelper.h"
 
 using namespace std;
 using namespace Eigen;
-
-void GN(const vector<double> &y_data, const vector<double> &x_data, int N, double ae, double be, double ce);
-void LM(const vector<double> &y_data, const vector<double> &x_data, int N, double ae, double be, double ce);
-void R_GN(const vector<double> &y_data, const vector<double> &x_data, int N, double ae, double be, double ce);
-void LM_Nielsen(const vector<double> &y_data, const vector<double> &x_data, int N, double ae, double be, double ce);
-void R_LM(const vector<double> &y_data, const vector<double> &x_data, int N, double ae, double be, double ce);
-double getRand();
-
-const double function_tolerance = 1e-5;
-const double max_trans_epsilon = 1e-5;
-const double parameter_tolerance = 1e-5;
-const int iterations = 1000;
-
-int main(int argc, char **argv)
-{
-    char name[] = "log";
-    GLogHelper log(name);
-
-    double ar = 1.0, br =  2.0, cr = 1.0;   // 真实参数值
-//    double ae = 2.0, be = -1.0, ce = 5.0;   // 初始估计参数值
-    double ae = 0.9, be = 1.9, ce = 0.9;   // 初始估计参数值
-    int N = 1000;                           // 数据点
-    double w_sigma = 1.0;                   // 噪声sigma
-    cv::RNG rng;                            // Opencv随机数生成器
-
-    /// 生成测试数据并保存
-    ofstream filePoints("./scripts/data.txt", ios::trunc);
-    vector<double> x_data, y_data;
-    for (int i = 0; i < N;  i++ )
-    {
-        double x = i / 1000.0;
-        x_data.push_back(x);
-
-        double y = exp(ar * x * x + br * x + cr)  + rng.gaussian(w_sigma * w_sigma);
-        // outliers
-        if (i == 200)
-        {
-            LOG(INFO) << "add outlier: (0.2, 3000)";
-            y_data.push_back(3000.00);
-            filePoints << x << "," << 3000.00 << endl;
-        }
-        else
-        {
-            y_data.push_back(y);
-            filePoints << x << "," << y << endl;
-        }
-
-    }
-    filePoints.close();
-
-    GN( y_data, x_data, N, ae, be, ce);
-    LOG(INFO);
-    R_GN(y_data, x_data, N, ae, be, ce);
-    LOG(INFO);
-    LM(y_data, x_data, N, ae, be, ce);
-    LOG(INFO);
-    LM_Nielsen(y_data, x_data, N, ae, be, ce);
-    LOG(INFO);
-    R_LM(y_data,x_data,N, ae ,be, ce);
-    LOG(INFO);
-
-//    ofstream fileResult("./scripts/result.txt", ios::trunc);
-//    fileResult << ae << ',' << be << ',' << ce;
-//    fileResult.close();
-
-    // outliers
-//    y_data[988] = 0.00;
-//    y_data[998] = 0.00;
-
-//    LOG(INFO) << "手动 增加 outliers : "<<std::endl;
-//    LOG(INFO) << "令　y[988] = 0.0 ，y[998] = 0.0  　再次求解: ";
-
-    LOG(INFO) << "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<";
-    system("bash ./scripts/display.sh");
-    return 0;
-}
 
 //  得到 0 -1 之间的随机数
 double getRand()
@@ -98,7 +15,6 @@ double getRand()
     srand( time(nullptr));
     return 2.0* ( rand()%(n+1) / (double) (n+1) ) -1.0 ;
 }
-
 
 /**
  * @brief Gauss-Newton
