@@ -16,11 +16,21 @@ void ceresSolver(const std::vector<double> &y_data,
     // 构建最小二乘问题
     ceres::Problem problem;
     for (int i = 0; i < N; ++i) {
-        problem.AddResidualBlock(
-                new ceres::AutoDiffCostFunction<CERES_CURVE_COST, 1, 3>(
-                        new CERES_CURVE_COST(x_data[i], y_data[i])),
-                nullptr, abc
-        );
+        /// 自动求导
+        ceres::CostFunction* cost_function =
+                new ceres::AutoDiffCostFunction<Auto_Diff_Curve_Cost, 1, 3>(
+                        new Auto_Diff_Curve_Cost(x_data[i], y_data[i]));
+
+        /// 数值求导
+        ceres::CostFunction* numeric_cost_function =
+                new ceres::NumericDiffCostFunction<Numeric_Diff_Curve_Cost, ceres::CENTRAL,1 ,3>(
+                        new Numeric_Diff_Curve_Cost(x_data[i], y_data[i]));
+
+        /// 解析求导
+        ceres::CostFunction* analytic_cost_function = new AnalyticCostFunctor(x_data[i], y_data[i]);
+
+        /// 添加残差项 (替换误差函数即可)
+        problem.AddResidualBlock(analytic_cost_function, new ceres::CauchyLoss(24.0), abc);
     }
 
     // 配置求解器

@@ -92,18 +92,25 @@ plt.subplot(1, 2, 2)
 plt.title('error')
 plt.xlabel('iter')
 plt.ylabel('error')
+
 plt.plot(gn_iter, gn_error, linewidth=0.5, c='r')
 plt.scatter(gn_iter, gn_error, s=5, c='r', marker='o', alpha=0.5, label='GN')
-plt.plot(rgn_iter, rgn_error, linewidth=0.5, c='r')
-plt.scatter(rgn_iter, rgn_error, s=5, c='r', marker='o', alpha=0.5, label='RGN')
-plt.plot(lm_iter, lm_error, linewidth=0.5, c='b')
-plt.scatter(lm_iter, lm_error, s=5, c='b', marker='^', alpha=0.5, label='LM')
+#
+# plt.plot(lm_iter, lm_error, linewidth=0.5, c='b')
+# plt.scatter(lm_iter, lm_error, s=5, c='b', marker='^', alpha=0.5, label='LM')
+#
+# plt.plot(lmn_iter, lmn_error, linewidth=0.5, c='g')
+# plt.scatter(lmn_iter, lmn_error, s=5, c='g', marker='x', alpha=0.5, label='LMN')
+#
+# plt.plot(rgn_iter, rgn_error, linewidth=0.5, c='r')
+# plt.scatter(rgn_iter, rgn_error, s=5, c='r', marker='o', alpha=0.5, label='RGN')
+
 plt.plot(rlm_iter, rlm_error, linewidth=0.5, c='b')
 plt.scatter(rlm_iter, rlm_error, s=5, c='b', marker='^', alpha=0.5, label='RLM')
-plt.plot(lmn_iter, lmn_error, linewidth=0.5, c='g')
-plt.scatter(lmn_iter, lmn_error, s=5, c='g', marker='x', alpha=0.5, label='LMN')
+
 plt.plot(ceres_iter, ceres_error, linewidth=0.5, c='g')
 plt.scatter(ceres_iter, ceres_error, s=5, c='g', marker='x', alpha=0.5, label='CERES')
+
 plt.legend(loc='best')
 # show
 plt.show()
