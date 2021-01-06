@@ -9,6 +9,7 @@
 #include <vector>
 #include <cstdlib>
 #include <ctime>
+#include <cmath>
 
 #include <opencv2/opencv.hpp>
 #include <Eigen/Core>

@@ -7,16 +7,17 @@
 
 #include "optimization.h"
 #include "ceresSolver.h"
+#include "g2oSolver.h"
 
 using namespace std;
 using namespace Eigen;
 
-
 int main(int argc, char **argv)
 {
-    char name[] = "log";
-    GLogHelper log(name);
+    // char name[] = "log";
+    // GLogHelper log(name);
 
+    // google::InitGoogleLogging(argv[0]);
 
     double ar = 1.0, br =  2.0, cr = 1.0;   // 真实参数值
     // double ae = 2.0, be = -1.0, ce = 5.0;   // 初始估计参数值
@@ -49,8 +50,6 @@ int main(int argc, char **argv)
     }
     filePoints.close();
 
-
-
     ofstream fileResult("./scripts/result.txt", ios::trunc);
     fileResult << ar << ',' << br << ',' << cr;
 
@@ -81,6 +80,11 @@ int main(int argc, char **argv)
 
     /// ceres
     ceresSolver(y_data, x_data, N, ae, be, ce);
+    fileResult << ae << ',' << be << ',' << ce;
+    LOG(INFO);
+
+    /// g2o
+    g2oSolver(y_data, x_data, N, ae, be, ce);
     fileResult << ae << ',' << be << ',' << ce;
     LOG(INFO);
 

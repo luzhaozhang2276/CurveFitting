@@ -31,7 +31,7 @@ add_library(${PROJECT_NAME} SHARED
         src/GLogHelper.cpp
         src/ceresSolver.cpp
         src/optimization.cpp
-#        src/test.cpp
+        src/g2oSolver.cpp
         )
 
 target_link_libraries(${PROJECT_NAME}
@@ -42,5 +42,5 @@ target_link_libraries(${PROJECT_NAME}
         )
 
 ############### executable ######################
-add_executable(demo app/main.cpp)
+add_executable(demo app/CurveFitting.cpp)
 target_link_libraries(demo ${PROJECT_NAME})
