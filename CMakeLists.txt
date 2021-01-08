@@ -7,6 +7,8 @@ set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
 
 ############### dependencies ######################
+# Sophus
+find_package(Sophus REQUIRED)
 # Eigen
 include_directories("/usr/include/eigen3" )
 # G2O
@@ -22,6 +24,7 @@ add_subdirectory(Thirdparty/glog)
 include_directories(
         ${PROJECT_SOURCE_DIR}
         ${PROJECT_SOURCE_DIR}/include
+        ${Sophus_INCLUDE_DIRS}
         ${G2O_INCLUDE_DIRS}
         ${CERES_INCLUDE_DIRS}
         ${OpenCV_INCLUDE_DIRS}
@@ -32,15 +35,23 @@ add_library(${PROJECT_NAME} SHARED
         src/ceresSolver.cpp
         src/optimization.cpp
         src/g2oSolver.cpp
+        src/initialize.cpp
+        src/poseGN.cpp
+        src/poseCeres.cpp
+        src/poseG2o.cpp
         )
 
 target_link_libraries(${PROJECT_NAME}
         ${OpenCV_LIBS}
+#        ${Sophus_LIBRARIES}
         ${CERES_LIBRARIES}
         g2o_core g2o_stuff g2o_types_sba
 #        glog::glog
         )
 
 ############### executable ######################
-add_executable(demo app/CurveFitting.cpp)
-target_link_libraries(demo ${PROJECT_NAME})
+add_executable(curve app/CurveFitting.cpp)
+target_link_libraries(curve ${PROJECT_NAME})
+
+add_executable(pose app/PoseEstimation.cpp)
+target_link_libraries(pose ${PROJECT_NAME})

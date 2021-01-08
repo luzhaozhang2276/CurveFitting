@@ -10,10 +10,13 @@
 #include <cstdlib>
 #include <ctime>
 #include <cmath>
+#include <chrono>
 
-#include <opencv2/opencv.hpp>
 #include <Eigen/Core>
 #include <Eigen/Dense>
+#include <sophus/se3.hpp>
+#include <opencv2/opencv.hpp>
+#include <opencv2/core/eigen.hpp>
 
 #include "GLogHelper.h"
 

@@ -1,9 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <cstdlib>
-
-#include <opencv2/opencv.hpp>
-#include <Eigen/Core>
+#include <opencv2/core/core.hpp>
 
 #include "optimization.h"
 #include "ceresSolver.h"
