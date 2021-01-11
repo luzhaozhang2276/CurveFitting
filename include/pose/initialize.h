@@ -23,19 +23,19 @@ void find_feature_matches(
         std::vector<cv::DMatch> &matches);
 
 bool checkRT(
-        const std::vector<cv::Point3f> &points_3d1,
-        const std::vector<cv::Point3f> &points_3d2,
-        const std::vector<cv::Point2f> &points_2d2,
+        const std::vector<cv::Point3d> &points_3d1,
+        const std::vector<cv::Point3d> &points_3d2,
+        const std::vector<cv::Point2d> &points_2d2,
         const cv::Mat &K,
         Sophus::SE3d &pose);
 
 bool generateData(const cv::Mat &K,
                   const std::string& img1, const std::string& img2,
                   const std::string& depth1, const std::string& depth2,
-                  std::vector<cv::Point3f>& pts_3d, std::vector<cv::Point2f>& pts_2d);
+                  std::vector<cv::Point3d>& pts_3d, std::vector<cv::Point2d>& pts_2d);
 
 bool transformData(const cv::Mat &R, const cv::Mat &t, Sophus::SE3d& pose,
-                   std::vector<cv::Point3f>& pts_3d, std::vector<cv::Point2f>& pts_2d,
+                   std::vector<cv::Point3d>& pts_3d, std::vector<cv::Point2d>& pts_2d,
                    VecVector3d& pts_3d_eigen, VecVector2d& pts_2d_eigen);
 
 

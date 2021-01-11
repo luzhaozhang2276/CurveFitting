@@ -63,9 +63,9 @@ void find_feature_matches(const Mat &img_1, const Mat &img_2,
 }
 
 bool checkRT(
-        const vector<Point3f> &points_3d1,
-        const vector<Point3f> &points_3d2,
-        const vector<Point2f> &points_2d2,
+        const vector<Point3d> &points_3d1,
+        const vector<Point3d> &points_3d2,
+        const vector<Point2d> &points_2d2,
         const Mat &K,
         Sophus::SE3d &pose
 )
@@ -113,7 +113,7 @@ bool checkRT(
 bool generateData(const cv::Mat &K,
                   const std::string& img1, const std::string& img2,
                   const std::string& depth1, const std::string& depth2,
-                  std::vector<cv::Point3f>& pts_3d, std::vector<cv::Point2f>& pts_2d)
+                  std::vector<cv::Point3d>& pts_3d, std::vector<cv::Point2d>& pts_2d)
 {
     //-- 读取图像
     Mat img_1 = imread(img1, CV_LOAD_IMAGE_COLOR);
@@ -154,7 +154,7 @@ bool generateData(const cv::Mat &K,
 }
 
 bool transformData(const cv::Mat &R, const cv::Mat &t, Sophus::SE3d& pose,
-                   std::vector<cv::Point3f>& pts_3d, std::vector<cv::Point2f>& pts_2d,
+                   std::vector<cv::Point3d>& pts_3d, std::vector<cv::Point2d>& pts_2d,
                    VecVector3d& pts_3d_eigen, VecVector2d& pts_2d_eigen)
 {
     for (size_t i = 0; i < pts_3d.size(); ++i) {

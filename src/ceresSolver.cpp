@@ -18,8 +18,8 @@ void ceresSolver(const std::vector<double> &y_data,
     for (int i = 0; i < N; ++i) {
         /// 自动求导
         ceres::CostFunction* cost_function =
-                new ceres::AutoDiffCostFunction<Auto_Diff_Curve_Cost, 1, 3>(
-                        new Auto_Diff_Curve_Cost(x_data[i], y_data[i]));
+                new ceres::AutoDiffCostFunction<Auto_Diff_Pose_Cost, 1, 3>(
+                        new Auto_Diff_Pose_Cost(x_data[i], y_data[i]));
 
         /// 数值求导
         ceres::CostFunction* numeric_cost_function =

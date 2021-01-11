@@ -11,8 +11,8 @@
 
 // 代价函数的计算模型
 /// 自动求导模型
-struct Auto_Diff_Curve_Cost {
-    Auto_Diff_Curve_Cost(double x, double y) : _x(x), _y(y) {}
+struct Auto_Diff_Pose_Cost {
+    Auto_Diff_Pose_Cost(double x, double y) : _x(x), _y(y) {}
 
     // 残差的计算
     template<typename T>

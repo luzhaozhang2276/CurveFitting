@@ -85,7 +85,7 @@ void bundleAdjustmentGaussNewton(
     chrono::steady_clock::time_point t2 = chrono::steady_clock::now();
     chrono::duration<double> time_used = chrono::duration_cast<chrono::duration<double>>(t2 - t1);
 
-    cerr << "pose by g-n: \n" << pose.matrix() << endl;
+    cerr << fixed << setprecision(10) << "pose by g-n: \n" << pose.matrix() << endl;
 
     LOG(INFO) << "solve pnp by gauss newton cost time: " << time_used.count() << " seconds.";
 }
